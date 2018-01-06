@@ -31,3 +31,8 @@ doctrine:
             type: apcu
         result_cache_driver:
             type: apcu
+        second_level_cache:
+            enabled: true
+            log_enabled: true
+            region_cache_driver:
+                type: apcu

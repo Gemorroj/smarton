@@ -24,8 +24,11 @@ class Order implements \JsonSerializable
     private $id;
 
     /**
-     * @var int
+     * @var string
      *
+     * @Assert\NotBlank(message="facebookId является обязательным")
+     * @Assert\Length(max="20", maxMessage="Facebook ID не должен состоять не более, чем из {{ limit }} символов")
+     * @Assert\Regex("/^[0-9]+$/", message="Facebook ID должен состоять только из чисел")
      * @ORM\Column(name="facebook_id", type="bigint", nullable=false, options={"unsigned"=true,"comment"="Facebook ID"})
      * @see https://developers.facebook.com/docs/graph-api/reference/user/
      */
@@ -41,6 +44,8 @@ class Order implements \JsonSerializable
     /**
      * @var string
      *
+     * @Assert\NotBlank(message="currency является обязательным")
+     * @Assert\Currency()
      * @ORM\Column(name="currency", type="string", length=3, nullable=false, options={"fixed"=true,"comment"="Валюта. Справочник ISO 4217"})
      */
     private $currency;
@@ -48,6 +53,7 @@ class Order implements \JsonSerializable
     /**
      * @var Decimal
      *
+     * @Assert\NotBlank(message="totalCost является обязательным")
      * @ORM\Column(name="total_cost", type="decimal", precision=12, scale=2, nullable=false, options={"comment"="Общая стоимость заказа"})
      */
     private $totalCost;
@@ -55,6 +61,8 @@ class Order implements \JsonSerializable
     /**
      * @var bool
      *
+     * @Assert\NotNull(message="isLegalPerson является обязательным")
+     * @Assert\Type(type="boolean")
      * @ORM\Column(name="is_legal_person", type="boolean", nullable=false, options={"comment"="Юридическое лицо"}, columnDefinition="TINYINT(1) DEFAULT '0'")
      */
     private $isLegalPerson = false;
@@ -95,18 +103,18 @@ class Order implements \JsonSerializable
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getFacebookId(): int
+    public function getFacebookId(): string
     {
         return $this->facebookId;
     }
 
     /**
-     * @param int $facebookId
+     * @param string $facebookId
      * @return Order
      */
-    public function setFacebookId(int $facebookId): Order
+    public function setFacebookId(string $facebookId): Order
     {
         $this->facebookId = $facebookId;
         return $this;
@@ -155,6 +163,9 @@ class Order implements \JsonSerializable
      */
     protected static function makeTotalCost($value)
     {
+        if (\is_string($value)) {
+            $value = \str_replace(',', '.', $value);
+        }
         return Decimal::create($value, 2);
     }
 

@@ -28,6 +28,11 @@ CREATE TABLE `orders` (
   `is_legal_person` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'Юридическое лицо',
   `attributes` json CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT 'Произвольные атрибуты в JSON',
   PRIMARY KEY (`id`),
-  CONSTRAINT `orders_attributes_json_valid` CHECK (json_valid(`attributes`))
+  CONSTRAINT `orders_attributes_json_valid` CHECK (`attributes` IS NULL OR json_valid(`attributes`))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Заказы';
 ```
+see more about json in mariadb https://mariadb.com/resources/blog/json-mariadb-102
+
+
+### symfony/intl
+`symfony/intl` need for currency validator

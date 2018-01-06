@@ -45,5 +45,5 @@ php bin/console app:cleaner today
 
 ### дамп записей за предыдущие дни
 ```bash
-php bin/console app:dumper today
+php bin/console app:dumper --gzip today /dump.sql.gz
 ```

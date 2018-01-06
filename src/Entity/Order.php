@@ -34,7 +34,7 @@ class Order implements \JsonSerializable
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_create", type="datetime", nullable=false, options={"comment"="Дата создания записи"}, columnDefinition="DATETIME DEFAULT NOW() NOT NULL)
+     * @ORM\Column(name="date_create", type="datetime", nullable=false, options={"comment"="Дата создания записи"}, columnDefinition="DATETIME DEFAULT NOW() NOT NULL")
      */
     private $dateCreate;
 

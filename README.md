@@ -1,24 +1,12 @@
 ### Test app using Symfony 4 and NelmioApiDocBundle
 
 
-### generate entities
-https://github.com/doctrine/DoctrineBundle/issues/729#issuecomment-348858634
-```bash
-php bin/console doctrine:mapping:convert --from-database annotation ./src/Entity
-```
-
-
-### create controllers, command and others
-https://symfony.com/doc/current/bundles/SymfonyMakerBundle/index.html
-
-
-### NelmioApiBundle
-need `symfony/twig-bundle` and `symfony/asset` for `/api/doc/` page. see https://github.com/nelmio/NelmioApiDocBundle/issues/1141
-bug? https://github.com/nelmio/NelmioApiDocBundle/issues/1168
-
-
-### SQL. Use mariabd 10.2.12
+#### Структура БД
+Используется MariaDB 10.2.12
 ```sql
+CREATE DATABASE `smarton` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `smarton`;
+
 CREATE TABLE `orders` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `facebook_id` bigint(20) unsigned NOT NULL COMMENT 'Facebook ID',
@@ -31,19 +19,48 @@ CREATE TABLE `orders` (
   CONSTRAINT `orders_attributes_json_valid` CHECK (`attributes` IS NULL OR json_valid(`attributes`))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Заказы';
 ```
-see more about json in mariadb https://mariadb.com/resources/blog/json-mariadb-102
+Подробнее про тип `json` в mariadb можно посмотреть тут https://mariadb.com/resources/blog/json-mariadb-102
 
 
-### symfony/intl
-`symfony/intl` need for currency validator
+#### команда для генерации сущностей
+```bash
+php bin/console doctrine:mapping:convert --from-database annotation ./src/Entity
+```
+`doctrine:mapping:import` не работает, см. https://github.com/doctrine/DoctrineBundle/issues/729#issuecomment-348858634
 
 
-### удаление записей за предыдущие дни
+#### NelmioApiBundle
+Для создания REST API и документации к нему используется бандл `NelmioApiBundle`
+Для документации (`/api/doc/`) дополнительно нужно установить `symfony/twig-bundle` и `symfony/asset`. См. https://github.com/nelmio/NelmioApiDocBundle/issues/1141
+bug? https://github.com/nelmio/NelmioApiDocBundle/issues/1168
+
+
+#### symfony/intl
+`symfony/intl` требуется для валидации типов валют (ISO 4217)
+
+
+#### команда для удаления записей за предыдущие дни
 ```bash
 php bin/console app:cleaner today
 ```
 
-### дамп записей за предыдущие дни
+#### команда для дампа записей за предыдущие дни
 ```bash
 php bin/console app:dumper --gzip today /dump.sql.gz
 ```
+
+
+#### Общая информация
+Выбран `symfony4` + `NelmioApiBundle` во многом для личного обучения. symfony/flex пока что в продакшене не применял, т.к. инфраструктура новой версии фреймворка довольно сырая.
+Например, используемый `NelmioApiBundle` всего лишь на днях научился работать с Symfony 4. См. https://github.com/symfony/recipes-contrib/pull/226
+
+Требуемая производительность должна обеспечиваться плоской структурой БД (всего 1 таблица), а так же включенным кэшем (second level cache). Кэш поможет при выборках из таблицы, т.к., в реальном приложении, скорее всего будут операции не только на запись, но и на чтение.
+Так же, приложение должно элементарно масштабироваться. Например, 1 `nginx` в качестве балансировщика, и масса независимых `php-fpm` на отдельных серверах. Кэш, соответственно, должен стать распределенным, например, храниться в `redis`.
+
+Документация для работы с REST API находится по адресу http://example.com/api/doc или в json для `swagger` http://example.com/api/doc.json
+Там же можно, выполнить запросы.
+
+Произвольные пользвательские данные выполнены в виде `json` объекта.
+Код валюты, сделан в виде справочника ISO 4217.
+Выборка и удаление записей сделаны в виде консольных команд с возможностью задать произвольную дату (см. http://php.net/manual/ru/datetime.formats.relative.php).
+Для автоматизации нужно поставить команды на выполнение в какой-нибудь планировщик. Например, `cron`.

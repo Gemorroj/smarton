@@ -1,7 +1,8 @@
-
-###> symfony/framework-bundle ###
+tz-belkanton.pdf
 .idea
 composer.phar
+
+###> symfony/framework-bundle ###
 .env
 /public/bundles/
 /var/

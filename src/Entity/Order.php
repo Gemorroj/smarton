@@ -9,7 +9,7 @@ use Litipk\BigNumbers\Decimal;
  * Orders
  *
  * @ORM\Table(name="orders")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\OrderRepository")
  * @ORM\Cache(usage="READ_ONLY")
  */
 class Order implements \JsonSerializable

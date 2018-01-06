@@ -36,3 +36,14 @@ see more about json in mariadb https://mariadb.com/resources/blog/json-mariadb-1
 
 ### symfony/intl
 `symfony/intl` need for currency validator
+
+
+### удаление записей за предыдущие дни
+```bash
+php bin/console app:cleaner today
+```
+
+### дамп записей за предыдущие дни
+```bash
+php bin/console app:dumper today
+```

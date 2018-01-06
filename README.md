@@ -64,3 +64,8 @@ php bin/console app:dumper --gzip today /dump.sql.gz
 Код валюты, сделан в виде справочника ISO 4217.
 Выборка и удаление записей сделаны в виде консольных команд с возможностью задать произвольную дату (см. http://php.net/manual/ru/datetime.formats.relative.php).
 Для автоматизации нужно поставить команды на выполнение в какой-нибудь планировщик. Например, `cron`.
+
+
+### TODO:
+- тесты
+- https://github.com/nelmio/NelmioApiDocBundle/issues/1168

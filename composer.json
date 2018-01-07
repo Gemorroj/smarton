@@ -23,6 +23,7 @@
         "symfony/yaml": "^4.0"
     },
     "require-dev": {
+        "symfony/polyfill-apcu": "^1.6",
         "symfony/web-profiler-bundle": "^4.0",
         "symfony/maker-bundle": "^1.0@dev",
         "symfony/phpunit-bridge": "^4.0",

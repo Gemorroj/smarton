@@ -21,7 +21,7 @@ install:
     - if [[ "$DEPENDENCIES" = 'low' ]]; then travis_retry composer update $DEFAULT_COMPOSER_FLAGS --prefer-lowest; fi
 
 script:
-    - vendor/bin/phpunit --configuration phpunit.xml
+    - vendor/bin/phpunit --configuration phpunit.xml.dist
 
 notifications:
     email:

@@ -26,6 +26,8 @@ class OrderController extends Controller
     public function listAction()
     {
         // @SWG\Schema(type="array", @Model(type=Order::class))
+        // https://github.com/nelmio/NelmioApiDocBundle/issues/1168
+
         $repository = $this->getDoctrine()->getRepository(Order::class);
         $orders = $repository->findAll();
         return $this->json([

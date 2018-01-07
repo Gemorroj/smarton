@@ -54,35 +54,35 @@ class OrderController extends Controller
      * @SWG\Parameter(
      *     required=true,
      *     name="facebookId",
-     *     in="query",
+     *     in="formData",
      *     type="number",
      *     description="Facebook ID"
      * )
      * @SWG\Parameter(
      *     required=true,
      *     name="currency",
-     *     in="query",
+     *     in="formData",
      *     type="string",
      *     description="Currency code"
      * )
      * @SWG\Parameter(
      *     required=true,
      *     name="totalCost",
-     *     in="query",
+     *     in="formData",
      *     type="number",
      *     description="Total cost"
      * )
      * @SWG\Parameter(
      *     required=true,
      *     name="isLegalPerson",
-     *     in="query",
+     *     in="formData",
      *     type="boolean",
      *     description="Is legal person?"
      * )
      * @SWG\Parameter(
      *     required=false,
      *     name="attributes",
-     *     in="query",
+     *     in="formData",
      *     type="string",
      *     description="Some attributes. JSON string"
      * )

@@ -32,7 +32,6 @@ php bin/console doctrine:mapping:convert --from-database annotation ./src/Entity
 #### NelmioApiBundle
 Для создания REST API и документации к нему используется бандл `NelmioApiBundle`
 Для документации (`/api/doc/`) дополнительно нужно установить `symfony/twig-bundle` и `symfony/asset`. См. https://github.com/nelmio/NelmioApiDocBundle/issues/1141
-bug? https://github.com/nelmio/NelmioApiDocBundle/issues/1168
 
 
 #### symfony/intl
@@ -67,4 +66,4 @@ php bin/console app:dumper --gzip today /dump.sql.gz
 
 
 ### TODO:
-- https://github.com/nelmio/NelmioApiDocBundle/issues/1168
+- bug https://github.com/nelmio/NelmioApiDocBundle/issues/1168

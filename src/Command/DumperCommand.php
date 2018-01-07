@@ -63,7 +63,7 @@ class DumperCommand extends Command
         $process = new Process(\implode(' ', $cmd));
         $process->mustRun();
 
-        // mysqldump "smarton" orders -u "root" --password="" --host="127.0.0.1" --port="3306" --single-transaction --where="date_create < 2018-01-06 00:00:00.000000" > "/dump.sql"
+        // mysqldump "smarton" orders -u "root" --password="" --host="127.0.0.1" --port="3306" --single-transaction --where="date_create < \"2018-01-06 00:00:00.000000\"" > "/dump.sql"
         $io->success('Дамп успешно создан');
     }
 }

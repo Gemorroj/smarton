@@ -67,5 +67,4 @@ php bin/console app:dumper --gzip today /dump.sql.gz
 
 
 ### TODO:
-- тесты
 - https://github.com/nelmio/NelmioApiDocBundle/issues/1168

@@ -63,7 +63,9 @@ class OrderController extends Controller
      *     name="currency",
      *     in="formData",
      *     type="string",
-     *     description="Currency code"
+     *     maxLength=3,
+     *     minLength=3,
+     *     description="Currency code. ISO 4217"
      * )
      * @SWG\Parameter(
      *     required=true,
@@ -74,6 +76,7 @@ class OrderController extends Controller
      * )
      * @SWG\Parameter(
      *     required=true,
+     *     default="false",
      *     name="isLegalPerson",
      *     in="formData",
      *     type="boolean",

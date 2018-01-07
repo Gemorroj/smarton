@@ -65,7 +65,6 @@ class OrderControllerTest extends WebTestCase
      */
     public function testFailCreate($requestParameters)
     {
-        var_dump($requestParameters);
         $client = static::createClient();
         $crawler = $client->request('POST', '/api/order/create', $requestParameters);
 

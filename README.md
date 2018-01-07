@@ -1,5 +1,7 @@
 ### Test app using Symfony 4 and NelmioApiDocBundle
 
+[![Build Status](https://secure.travis-ci.org/Gemorroj/smarton.png?branch=master)](https://travis-ci.org/Gemorroj/smarton)
+
 
 #### Структура БД
 Используется MariaDB 10.2.12

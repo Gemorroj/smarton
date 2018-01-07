@@ -54,6 +54,7 @@ class Order implements \JsonSerializable
      * @var Decimal
      *
      * @Assert\NotBlank(message="totalCost является обязательным")
+     * @Assert\Regex("/^[0-9]{1,10}((?:\.|,)[0-9]{1,2})?$/", message="totalCost должен быть формата 12,2")
      * @ORM\Column(name="total_cost", type="decimal", precision=12, scale=2, nullable=false, options={"comment"="Общая стоимость заказа"})
      */
     private $totalCost;

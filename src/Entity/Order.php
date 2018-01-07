@@ -2,7 +2,6 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 use Litipk\BigNumbers\Decimal;
 
 /**
@@ -26,9 +25,6 @@ class Order implements \JsonSerializable
     /**
      * @var string
      *
-     * @Assert\NotBlank(message="facebookId является обязательным")
-     * @Assert\Length(max="20", maxMessage="Facebook ID не должен состоять не более, чем из {{ limit }} символов")
-     * @Assert\Regex("/^[0-9]+$/", message="Facebook ID должен состоять только из чисел")
      * @ORM\Column(name="facebook_id", type="bigint", nullable=false, options={"unsigned"=true,"comment"="Facebook ID"})
      * @see https://developers.facebook.com/docs/graph-api/reference/user/
      */
@@ -44,8 +40,6 @@ class Order implements \JsonSerializable
     /**
      * @var string
      *
-     * @Assert\NotBlank(message="currency является обязательным")
-     * @Assert\Currency()
      * @ORM\Column(name="currency", type="string", length=3, nullable=false, options={"fixed"=true,"comment"="Валюта. Справочник ISO 4217"})
      */
     private $currency;
@@ -53,8 +47,6 @@ class Order implements \JsonSerializable
     /**
      * @var Decimal
      *
-     * @Assert\NotBlank(message="totalCost является обязательным")
-     * @Assert\Regex("/^[0-9]{1,10}((?:\.|,)[0-9]{1,2})?$/", message="totalCost должен быть формата 12,2")
      * @ORM\Column(name="total_cost", type="decimal", precision=12, scale=2, nullable=false, options={"comment"="Общая стоимость заказа"})
      */
     private $totalCost;
@@ -62,8 +54,6 @@ class Order implements \JsonSerializable
     /**
      * @var bool
      *
-     * @Assert\NotNull(message="isLegalPerson является обязательным")
-     * @Assert\Type(type="boolean")
      * @ORM\Column(name="is_legal_person", type="boolean", nullable=false, options={"comment"="Юридическое лицо"}, columnDefinition="TINYINT(1) DEFAULT '0'")
      */
     private $isLegalPerson = false;

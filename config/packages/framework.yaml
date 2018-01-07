@@ -1,6 +1,5 @@
 framework:
     secret: '%env(APP_SECRET)%'
-    validation: { enable_annotations: true }
     default_locale: ru
     #csrf_protection: ~
     #http_method_override: true

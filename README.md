@@ -14,7 +14,7 @@ CREATE TABLE `orders` (
   `currency` char(3) NOT NULL COMMENT 'Валюта. Справочник ISO 4217',
   `total_cost` decimal(12,2) unsigned NOT NULL COMMENT 'Общая стоимость заказа',
   `is_legal_person` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'Юридическое лицо',
-  `attributes` json CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT 'Произвольные атрибуты в JSON',
+  `attributes` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT 'Произвольные атрибуты в JSON',
   PRIMARY KEY (`id`),
   CONSTRAINT `orders_attributes_json_valid` CHECK (`attributes` IS NULL OR json_valid(`attributes`))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Заказы';

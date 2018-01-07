@@ -15,6 +15,9 @@ before_install:
     # Update composer
     - composer self-update
     - composer clear-cache
+    # Install apcu
+    - pecl channel-update pecl.php.net
+    - echo yes | pecl upgrade apcu
 
 install:
     - if [[ "$DEPENDENCIES" = 'high' ]]; then travis_retry composer update $DEFAULT_COMPOSER_FLAGS; fi
